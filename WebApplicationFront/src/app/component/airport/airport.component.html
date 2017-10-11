@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col">
+        
+    <div class="form-group">
+      <label for="byCountry">Według kraju:</label>
+      <select [(ngModel)]="selectedCountry" class="form-control" id="byCountry">
+        <option *ngFor="let country of countries" [ngValue]="country.name">{{country.name}}</option>
+      </select>
+      <button *ngIf="selectedCountry" class="btn btn-primary btn-block" (click)="viewAirportsByCountry(selectedCountry)">Wyświetl</button>  
+    </div>
+
+    <div class="form-group">
+      <label for="byIsoCountry">Według iso kraju:</label>
+      <select [(ngModel)]="selectedIsoCountry" class="form-control" id="byIsoCountry">
+        <option *ngFor="let country of countries" [ngValue]="country.isoCountryCode">{{country.isoCountryCode}}</option>
+      </select>
+      <button *ngIf="selectedIsoCountry" class="btn btn-primary btn-block" (click)="viewAirportsByIsoCountry(selectedIsoCountry)">Wyświetl</button>
+    </div>
+
+    <div class="form-group">
+      <label for="byAirportCode">Według kodu lotniska:</label>
+      <select [(ngModel)]="selectedAirportCode" class="form-control" id="byAirportCode">
+        <option *ngFor="let airportBd of airportsBd" [ngValue]="airportBd.code">{{airportBd.code}}</option>
+      </select>
+      <button *ngIf="selectedAirportCode" class="btn btn-primary btn-block" (click)="viewAirportsByAirportCode(selectedAirportCode)">Wyświetl</button>
+    </div>
+
+    <div class="form-group">
+      <label for="byAirportName">Według nazwy lotniska:</label>
+      <select [(ngModel)]="selectedAirportName" class="form-control" id="byAirportName">
+        <option *ngFor="let airportBd of airportsBd" [ngValue]="airportBd.name">{{airportBd.name}}</option>
+      </select>
+      <button *ngIf="selectedAirportName" class="btn btn-primary btn-block" (click)="viewAirportsByAirportName(selectedAirportName)">Wyświetl</button>
+    </div>
+
+  </div>
+  <div class="col">
+    mapa
+  </div>
+</div>
+<div class="row" *ngIf="showAirports">
+
+  <div class="col-sm-12 col-md-6 col-lg-4"  *ngFor="let airport of airports.airport">
+    <table class="table" >
+      
+      <tbody>
+        <tr>
+          <th scope="row">Kod</th>
+          <td>{{airport.airportCode}}</td>        
+        </tr>
+        <tr>
+          <th scope="row">Nazwa</th>
+          <td> {{airport.cityOrAirportName}}</td>        
+        </tr>
+        <tr>
+          <th scope="row">Kraj</th>
+          <td>{{airport.country}}</td>        
+        </tr>
+        <tr>
+          <th scope="row">ISO kraju</th>
+          <td>{{airport.countryAbbrviation}}</td>        
+        </tr>
+        <tr>
+          <th scope="row">Kod kraju</th>
+          <td>{{airport.countryCode}}</td>        
+        </tr>
+        <tr>
+          <th scope="row">Strefa czasowa</th>
+          <td>{{airport.gmtOffset}}</td>        
+        </tr>
+        <tr>
+          <th scope="row">Pas startowy</th>
+          <td>{{airport.runwayLengthFeet}}m</td>        
+        </tr>
+        <tr>
+          <th scope="row">Wysokość n.p.m.</th>
+          <td>{{airport.runwayElevationFeet}}</td>        
+        </tr>
+        <tr>
+          <th scope="row">Szerokość geo</th>
+          <td>{{airport.latitudeNpeerS}} {{airport.latitudeDegree}}° {{airport.latitudeMinute}}' {{airport.latitudeSecond}}"</td>        
+        </tr>
+        <tr>
+          <th scope="row">Długość geo</th>
+          <td>{{airport.longitudeEperW}} {{airport.longitudeDegree}}° {{airport.longitudeMinute}}' {{airport.longitudeSeconds}}"</td>        
+        </tr>      
+    </table>
+  </div>
+</div>
