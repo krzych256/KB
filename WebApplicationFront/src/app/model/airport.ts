@@ -1,21 +1,21 @@
 export class Airport {
   
-    airportCode: String;
-    cityOrAirportName: String;
-    country: String;
-    countryAbbrviation: String;
-    countryCode: String;
-    gmtOffset: String;
-    runwayLengthFeet: String;
-    runwayElevationFeet: String;
-    latitudeDegree: String;
-    latitudeMinute: String;
-    latitudeSecond: String;
-    latitudeNpeerS: String;
-    longitudeDegree: String;
-    longitudeMinute: String;
-    longitudeSeconds: String;
-    longitudeEperW: String;
+    airportCode: string;
+    cityOrAirportName: string;
+    country: string;
+    countryAbbrviation: string;
+    countryCode: string;
+    gmtOffset: string;
+    runwayLengthFeet: string;
+    runwayElevationFeet: string;
+    latitudeDegree: string;
+    latitudeMinute: string;
+    latitudeSecond: string;
+    latitudeNpeerS: string;
+    longitudeDegree: string;
+    longitudeMinute: string;
+    longitudeSeconds: string;
+    longitudeEperW: string;
 
 }
 

@@ -10,6 +10,7 @@ import { AirportComponent } from './component/airport/airport.component';
 import { MapsComponent } from './component/maps/maps.component';
 
 import { AirportService } from './service/airport.service';
+import { MapsService } from './service/maps.service';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { AirportService } from './service/airport.service';
     HttpModule,
     AppRoutesModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU'
+      apiKey: 'KEY_MAP'
     })
   ],
   declarations: [
@@ -27,7 +28,10 @@ import { AirportService } from './service/airport.service';
     AirportComponent,
     MapsComponent
   ],  
-  providers: [AirportService],
+  providers: [
+    AirportService,
+    MapsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

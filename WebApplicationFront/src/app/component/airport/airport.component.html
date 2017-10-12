@@ -6,6 +6,7 @@
       <select [(ngModel)]="selectedCountry" class="form-control" id="byCountry">
         <option *ngFor="let country of countries" [ngValue]="country.name">{{country.name}}</option>
       </select>
+      <br />
       <button *ngIf="selectedCountry" class="btn btn-primary btn-block" (click)="viewAirportsByCountry(selectedCountry)">Wyświetl</button>  
     </div>
 
@@ -14,6 +15,7 @@
       <select [(ngModel)]="selectedIsoCountry" class="form-control" id="byIsoCountry">
         <option *ngFor="let country of countries" [ngValue]="country.isoCountryCode">{{country.isoCountryCode}}</option>
       </select>
+      <br />
       <button *ngIf="selectedIsoCountry" class="btn btn-primary btn-block" (click)="viewAirportsByIsoCountry(selectedIsoCountry)">Wyświetl</button>
     </div>
 
@@ -22,6 +24,7 @@
       <select [(ngModel)]="selectedAirportCode" class="form-control" id="byAirportCode">
         <option *ngFor="let airportBd of airportsBd" [ngValue]="airportBd.code">{{airportBd.code}}</option>
       </select>
+      <br />
       <button *ngIf="selectedAirportCode" class="btn btn-primary btn-block" (click)="viewAirportsByAirportCode(selectedAirportCode)">Wyświetl</button>
     </div>
 
@@ -30,17 +33,18 @@
       <select [(ngModel)]="selectedAirportName" class="form-control" id="byAirportName">
         <option *ngFor="let airportBd of airportsBd" [ngValue]="airportBd.name">{{airportBd.name}}</option>
       </select>
+      <br />
       <button *ngIf="selectedAirportName" class="btn btn-primary btn-block" (click)="viewAirportsByAirportName(selectedAirportName)">Wyświetl</button>
     </div>
 
   </div>
   <div class="col">
-    mapa
+    <maps-component *ngIf="showMaps" [airport]="airportSelected"></maps-component>    
   </div>
 </div>
 <div class="row" *ngIf="showAirports">
 
-  <div class="col-sm-12 col-md-6 col-lg-4"  *ngFor="let airport of airports.airport">
+  <div class="col-sm-12 col-md-6 col-lg-4 p-3"  *ngFor="let airport of airports.airport">
     <table class="table" >
       
       <tbody>
@@ -83,7 +87,10 @@
         <tr>
           <th scope="row">Długość geo</th>
           <td>{{airport.longitudeEperW}} {{airport.longitudeDegree}}° {{airport.longitudeMinute}}' {{airport.longitudeSeconds}}"</td>        
-        </tr>      
+        </tr>
+        <tr>
+          <button class="btn btn-primary btn-block" (click)="showDistanceOnMap(airport)">Pokaż odległość</button>
+        </tr>
     </table>
   </div>
 </div>

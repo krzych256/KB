@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AirportService } from './../../service/airport.service';
+
 
 import { Country } from './../../model/country';
 import { Airport } from './../../model/airport';
@@ -17,18 +18,25 @@ export class AirportComponent implements OnInit {
   countries: Country[];
   airports: Airport[];
   airportsBd: AirportDb[];
+  airportSelected: Airport;
   selectedCountry: string;
   selectedIsoCountry: string;
   selectedAirportCode: string;
   selectedAirportName: string;
-  showAirports = false;
-
+  showAirports: boolean = false;
+  showMaps: boolean = false;
 
   constructor(private airportService: AirportService) { }
 
   ngOnInit() : void {
     this.getAllCountries();
     this.getAirportDb();
+  }
+
+  showDistanceOnMap(airport: Airport): void {       
+    this.airportSelected = airport;    
+    this.showMaps = true;
+    window.scrollTo(0, 0);
   }
 
   getAllCountries():void {
@@ -96,6 +104,5 @@ export class AirportComponent implements OnInit {
                           console.log(err);
                         });
   }
-
 
 }
