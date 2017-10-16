@@ -1,12 +1,14 @@
-<agm-map [latitude]="userLatitude" [longitude]="userLongitude">
+<agm-map [latitude]="coordinationA.latitude" [longitude]="coordinationA.longitude">
 
-  <agm-marker [latitude]="userLatitude" [longitude]="userLongitude"></agm-marker>
-  <agm-marker [latitude]="airportLatitude" [longitude]="airportLongitude"></agm-marker>
+  <agm-marker [latitude]="coordinationA.latitude" [longitude]="coordinationA.longitude"></agm-marker>
 
-  <agm-polyline>
-    <agm-polyline-point [latitude]="userLatitude" [longitude]="userLongitude"></agm-polyline-point>
-    <agm-polyline-point [latitude]="airportLatitude" [longitude]="airportLongitude"></agm-polyline-point>
-  </agm-polyline>
+  <div *ngIf="isCoordinationBExist">
+    <agm-marker [latitude]="coordinationB.latitude" [longitude]="coordinationB.longitude"></agm-marker>
+    
+    <agm-polyline *ngIf="isPolylineExist" >
+      <agm-polyline-point [latitude]="coordinationA.latitude" [longitude]="coordinationA.longitude"></agm-polyline-point>
+      <agm-polyline-point [latitude]="coordinationB.latitude" [longitude]="coordinationB.longitude"></agm-polyline-point>
+    </agm-polyline>
+  </div>
+ 
 </agm-map>
-
-<h3 >Odległość w lini prostej: ~ {{distanceBeetwenAB | number:'1.0-2'}} km.</h3>

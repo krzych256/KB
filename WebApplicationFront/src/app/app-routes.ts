@@ -5,9 +5,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AirportComponent } from './component/airport/airport.component';
 import { MapsComponent } from './component/maps/maps.component';
 
-const routes: Routes = [
-  { path: '',  component: AirportComponent },
-  { path: 'maps',  component: MapsComponent },
+import { ViewComponent } from './component/test/view.component';
+
+const routes: Routes = [ 
+  { path: 'airports',  component: AirportComponent },
+  { path: 'test',  component: ViewComponent },
   
 ];
 @NgModule({

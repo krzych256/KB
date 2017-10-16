@@ -22,9 +22,7 @@ export class MapsService {
 
     degreesToRadians(degrees: number): number {
         return degrees * Math.PI / 180;
-    }
-   
-   
+    }   
 
     distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2): number {
         
@@ -43,4 +41,12 @@ export class MapsService {
 
     }
 
+    convertDMSToDecimal(direction: string, degree: number, minute: number, second: number): number{
+        if(direction == "W" || direction == "S") {
+            return -Math.abs(degree + (minute/60) + (second/3600));      
+        } else {
+            return degree + (minute/60) + (second/3600);
+        }  
+    }
+    
 }
