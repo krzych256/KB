@@ -3,52 +3,50 @@ package com.czat.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import com.czat.model.MessageChat;
-import com.czat.service.ChatService;
+import com.czat.model.UserChat;
+import com.czat.service.AccessService;
 
 @Controller
 public class CzatController {
 
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+
   @Autowired
-  private ChatService chatService;
-     
+  private AccessService accessService;
+
   @MessageMapping("/chat.addUser")
-  @SendTo("/channel/public")
-  public MessageChat addUserToQueue(@Payload MessageChat chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+  public void addUserToQueue(@Payload UserChat userChat, SimpMessageHeaderAccessor headerAccessor) {
+
+    accessService.addUserToChat(userChat, headerAccessor.getSessionId());
+    logger.info("Add new user to chat: " + userChat.getUsername());
     
-    chatService.addToQueue(headerAccessor.getSessionId());
-    
-    if(chatService.getChatQueue().getFirst().equals(headerAccessor.getSessionId())) {
-      MessageChat messageChat = new MessageChat();
-      messageChat.setSessionId(headerAccessor.getSessionId());
-      messageChat.setType(MessageChat.MessageType.JOIN);
-      messageChat.setSender(chatMessage.getSender());
-      
-      logger.info("Id Sesji: " + headerAccessor.getSessionId() + " username: " + chatMessage.getSender() + " type: " + messageChat.getType());
-      
-      return messageChat;
-    }
-        
-    chatMessage.setType(MessageChat.MessageType.BLOCK);
-    logger.info("Id Sesji: " + headerAccessor.getSessionId() + " username: " + chatMessage.getSender() + " type: " + chatMessage.getType());
-    
-    return chatMessage;
   }
   
-  
-  
-  
-  
-  
-  
-  
-  
+  @MessageMapping("/chat.sendMessage")
+  @SendTo("/channel/public")
+  public UserChat sendMessage(@Payload UserChat userChat) {
+    
+    //accessService.sendMessage(userChat);
+    return userChat;
+    
+  }
+
+  @EventListener
+  public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
+    
+    StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
+    accessService.deleteConnection(headerAccessor.getSessionId());
+    logger.info("Disconnect user: " + headerAccessor.getSessionAttributes().get("userName"));
+
+  }
+
 }

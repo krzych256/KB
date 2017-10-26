@@ -9,7 +9,14 @@
     <noscript>
       <h2>Sorry! Your browser doesn't support Javascript</h2>
     </noscript>
-    
+        
+    <div id="notConnectedUser" class="hidden">
+        <div class="username-page-container info-page-wait">
+            <h1>Niestety wszyscy konsultanci s¹ zajêci.</h1>
+            <h1>Prosimy o cierpliwosc.</h1>
+            <h1>Jest Pan nastêpny w kolejce.</h1>
+        </div>        
+    </div>    
     
     <div id="username-page">
         <div class="username-page-container">
@@ -28,7 +35,7 @@
     <div id="chat-page" class="hidden">
         <div class="chat-container">
             <div class="chat-header">
-                <h2>Spring WebSocket Chat Demo</h2>
+                <h2>Konsultacje</h2>
             </div>
             <div class="connecting">
                 Connecting...
@@ -39,22 +46,14 @@
             <form id="messageForm" name="messageForm" nameForm="messageForm">
                 <div class="form-group">
                     <div class="input-group clearfix">
-                        <input type="text" id="message" placeholder="Type a message..." autocomplete="off" class="form-control"/>
-                        <button type="submit" class="primary">Send</button>
+                        <input type="text" id="message" placeholder="Wpisz wiadomosc..." autocomplete="off" class="form-control"/>
+                        <button type="submit" class="primary">Wyslij</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    
-    <div id="reserve-queue" class="hidden">
-        <h1>Wait............................</h1>
-        <h2>Wait.......................................</h2>
-        <h3>Wait../......................</h3>
-        <p>WAAAAAAAAAAAAAAAAAAAAAAITE</p>
-        
-    </div>
-    
+            
     <script src="/js/sockjs.min.js"></script>
     <script src="/js/stomp.min.js"></script>
     <script src="/js/main.js"></script>

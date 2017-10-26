@@ -17,7 +17,7 @@ public class CzatConfig extends AbstractWebSocketMessageBrokerConfigurer{
 
   @Override
   public void configureMessageBroker(MessageBrokerRegistry registry) {
-      registry.setApplicationDestinationPrefixes("/app");
-      registry.enableSimpleBroker("/channel");
+      registry.setApplicationDestinationPrefixes("/app");      
+      registry.enableSimpleBroker("/topic","/queue", "/channel");
   }
 }

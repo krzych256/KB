@@ -16,21 +16,10 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1rem;
     line-height: 1.58;
-    color: #333;
-    background-color: #f4f4f4;
+    color: #333;    
     height: 100%;
 }
 
-body:before {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #128ff2;
-    content: "";
-    z-index: 0;
-}
 
 .clearfix:after {
     display: block;
@@ -295,4 +284,8 @@ button.accent {
     .chat-header h2 {
         font-size: 1.1em;
     }
+}
+
+.info-page-wait {
+	text-align: center;
 }
